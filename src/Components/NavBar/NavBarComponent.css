@@ -1,0 +1,114 @@
+
+
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f8fa; 
+    color: #2c3e50;
+  }
+  
+  .navbar-custom {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 30px;
+    position: fixed; 
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .navbar-custom .navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-custom .navbar-brand:hover {
+    color: #ff9a8b; 
+  }
+  
+  .navbar-custom .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .navbar-custom .nav-link {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-custom .nav-link:hover {
+    color: #ff9a8b;
+    transform: translateY(-2px); 
+  }
+  
+  .navbar-custom .navbar-collapse .nav-link {
+    display: block;
+  }
+  
+
+  .navbar-custom .nav-link.active {
+    color: #00ff87;
+  }
+  
+  .navbar-toggle {
+    border: none;
+    background: transparent;
+  }
+  
+  .navbar-custom .navbar-toggler-icon {
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 992px) {
+    .navbar-custom .navbar-collapse {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-custom .nav-link {
+      margin: 10px 0;
+      font-size: 1.2rem;
+    }
+  
+    .navbar-custom .navbar-brand {
+      font-size: 1.6rem;
+    }
+  
+    .navbar-custom .navbar-toggler-icon {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-custom {
+      padding: 10px 20px;
+    }
+  
+    .navbar-custom .nav-link {
+      font-size: 1rem;
+    }
+  
+    .navbar-custom .navbar-brand {
+      font-size: 1.4rem;
+    }
+  
+    .navbar-custom .navbar-toggler-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
