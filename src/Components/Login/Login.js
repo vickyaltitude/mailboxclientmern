@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import './Login.css'; 
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userReducerAction } from '../store/UserReducer';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error,setError] = useState(null)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 
   const handleSubmit = async (e) => {
@@ -22,14 +25,16 @@ const Login = () => {
      });
   
      const parsecheckUser = await checkUser.json();
-     
+
      if(checkUser.ok){
      
       console.log(parsecheckUser)
       setError(null)
-      alert('Login successful');
+      dispatch(userReducerAction.setIsLoggedIn(true))
+      dispatch(userReducerAction.setCurrentUserToken(parsecheckUser.userId))
       localStorage.setItem('userAuthId',parsecheckUser.userId)
-      navigate('/')
+      alert('Login successful');
+      navigate('/home')
 
      }else{
       setError(parsecheckUser.msg)
@@ -69,7 +74,7 @@ const Login = () => {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="login-btn">
+                <Button type="submit" className="login-btn">
                   Login
                 </Button>
               </Form>

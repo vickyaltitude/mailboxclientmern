@@ -13,10 +13,14 @@ app.use(cors({
     credentials: true
 }));
 
+
 const dbConnection = require('./util/db_connection');
 const userAuth =  require('./routes/userAuth');
+const emailRoute = require('./routes/emailRoute');
 
 app.use(userAuth);
+
+app.use(emailRoute);
 
 
 dbConnection().then(resp =>{

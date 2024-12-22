@@ -1,0 +1,81 @@
+/* home.css */
+
+.home-page {
+    background: linear-gradient(to right, #6a11cb, #2575fc);  /* Matching the color palette */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .email-form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #6a11cb;  /* Matching color */
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .editor-wrapper {
+    border: 1px solid #2575fc;
+    border-radius: 5px;
+  }
+  
+  .editor {
+    min-height: 200px;
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .toolbar {
+    background-color: #2575fc;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .send-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #00ff87;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+  }
+  
+  .send-btn:hover {
+    background-color: #ff9a8b;
+    transform: translateY(-2px);
+  }
+  
+  .logout-btn {
+    text-align: right;
+    font-size: 1rem;
+    color: #2575fc;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+  
+  .logout-btn:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 576px) {
+    .email-form-container {
+      padding: 20px;
+      max-width: 90%;
+    }
+  
+    h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
