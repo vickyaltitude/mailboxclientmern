@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import './Login.css'; 
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userReducerAction } from '../store/UserReducer';
 
@@ -80,7 +80,7 @@ const Login = () => {
               </Form>
               <div className="login-footer">
                 <p>
-                  Don't have an account? <a href="/signup">Sign up</a>
+                  Don't have an account? <NavLink to="/signup">Sign up</NavLink>
                 </p>
               </div>
             </div>

@@ -1,0 +1,44 @@
+
+.inbox-page {
+    background: linear-gradient(to right, #6a11cb, #2575fc); 
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+ 
+  .btn-compose {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    background-color: #00ff87; 
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.2s ease;
+  }
+  
+  .btn-compose:hover {
+    background-color: #ff9a8b; 
+    transform: translateY(-2px);
+  }
+  
+
+  .table {
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 10px;
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    color: #333; 
+  }
+  
+  .table tr:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  h3 {
+    color: #fff; 
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  

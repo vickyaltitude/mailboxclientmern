@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userEmails = new Schema({
-    senderEmai: {
+    senderEmail: {
         type: String,
         required: true
     },
-    receipentEmail:{
+    recipientEmail:{
         type: String,
         required: true
     },

@@ -6,6 +6,9 @@ import Home from "./Components/Home/Home";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userReducerAction } from "./Components/store/UserReducer";
+import InboxPage from "./Components/Home/Inbox";
+import MailDetailPage from "./Components/Home/MailDetailPage";
+
 
 
 
@@ -13,6 +16,7 @@ function App() {
    
   const dispatch = useDispatch();
    const navigate = useNavigate();
+  
 
 
   useEffect(()=>{
@@ -22,15 +26,15 @@ function App() {
 
     dispatch(userReducerAction.setIsLoggedIn())
     dispatch(userReducerAction.setCurrentUserToken(localStorage.getItem('userAuthId')))
-     navigate('/home')
   }else{
     dispatch(userReducerAction.setCurrentUserToken(null))
-    navigate('/signup')
+    navigate('/login')
   }
 
 
   },[])
 
+  
  
 
   return (
@@ -41,7 +45,9 @@ function App() {
       <Route path='/home' element={<Home />}/>
         <Route path='/signup' element={<SignUpPage />} /> 
         <Route path='/login' element={<Login /> }/>
-     </Routes>
+        <Route path='/inbox' element={<InboxPage />} />
+        <Route path='/inbox/:emailId' element={<MailDetailPage /> } />    
+        </Routes>
     </>
   );
 }
