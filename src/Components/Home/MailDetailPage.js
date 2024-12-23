@@ -8,34 +8,36 @@ const MailDetailPage = () => {
   const { emailId } = useParams(); 
   const navigate = useNavigate();
   const emails = useSelector(state => state.emailReducer.emails);
+  const sentEmails = useSelector(state => state.emailReducer.sentEmails);
 
-  console.log(emailId)
-  console.log(emails)
+ 
   const emailDetails = emails.find(email => email._id === emailId);
-  console.log(emailDetails)
-  if (!emailDetails) {
-    navigate('/inbox');
-  }
-
+  const sentEmailDetails = sentEmails.find(email => email._id === emailId);
+  const email = emailDetails ? emailDetails : sentEmailDetails;
+ 
   return (
     <div className="mail-detail-page">
       <Container>
         <Row className="mt-4 mb-4">
           <Col>
-            <Button variant="outline-light" onClick={() => navigate('/inbox')} className="btn-back">
+          {emailDetails &&  <Button variant="outline-light" onClick={() => navigate('/inbox')} className="btn-back">
               Back to Inbox
-            </Button>
+            </Button>}
+            {sentEmailDetails && <Button variant="outline-light" onClick={() => navigate('/sentemails')} className="btn-back">
+              Back to Sent Emails
+            </Button>}
+           
           </Col>
         </Row>
 
         <Row>
           <Col md={8} className="mx-auto">
             <div className="email-detail-container">
-              <h3>{emailDetails.emailSubject}</h3>
-              <p className="sender">From: {emailDetails.senderEmail}</p>
-              <p className="date">{emailDetails.createdDate}</p>
+              <h3>{email.emailSubject}</h3>
+              <p className="sender">From: {email.senderEmail}</p>
+              <p className="date">{email.createdDate}</p>
               <hr />
-              <p className="email-body">{emailDetails.emailBody}</p>
+              <p className="email-body">{email.emailBody}</p>
             </div>
           </Col>
         </Row>

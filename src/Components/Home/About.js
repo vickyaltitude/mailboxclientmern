@@ -18,7 +18,7 @@ const About = () => {
                   Whether you're managing personal or professional correspondence, Mailbox Client offers a smooth and user-friendly interface, combined with powerful features to help you stay on top of your inbox. 
                   With built-in support for composing, reading, organizing, and managing emails, we aim to provide a seamless communication experience for users across the globe.
                 </Card.Text>
-                <Button variant="primary" href="/signup">
+                <Button variant="primary" href="/home">
                   Get Started
                 </Button>
               </Card.Body>

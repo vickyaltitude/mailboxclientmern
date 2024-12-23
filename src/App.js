@@ -10,6 +10,7 @@ import { userReducerAction } from "./Components/store/UserReducer";
 import InboxPage from "./Components/Home/Inbox";
 import MailDetailPage from "./Components/Home/MailDetailPage";
 import About from "./Components/Home/About";
+import SentEmails from "./Components/Home/SentEmails";
 
 
 
@@ -58,6 +59,19 @@ function App() {
       dispatch(emailReducerAction.setEmails(parsedData.data))
        
       }).catch(err => console.log(err))
+
+      fetch('http://localhost:8000/getsentemails',{
+        method:'GET',
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization' : localStorage.getItem('userAuthId')
+        }
+      }).then(async resp =>{
+       const parsedData = await resp.json();
+      console.log(parsedData)
+      dispatch(emailReducerAction.setSentEmails(parsedData.data))
+       
+      }).catch(err => console.log(err))
   
 
     }
@@ -78,6 +92,7 @@ function App() {
         <Route path='/inbox' element={<InboxPage />} />
         <Route path='/inbox/:emailId' element={<MailDetailPage /> } /> 
         <Route path='/about' element={<About />} />
+        <Route path='/sentemails' element={<SentEmails/> } />
         </Routes>  
         }
    

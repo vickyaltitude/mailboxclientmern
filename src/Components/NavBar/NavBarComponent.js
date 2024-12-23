@@ -41,6 +41,7 @@ const NavbarComponent = () => {
             <Nav.Link as={Link} to="/home" className="nav-link">Compose</Nav.Link>
             <Nav.Link as={Link} to="/about" className="nav-link">About</Nav.Link>
             <Nav.Link as={Link} to="/inbox" className="nav-link">Inbox</Nav.Link>
+            <Nav.Link as={Link} to="/sentemails" className="nav-link">Sent-Emails</Nav.Link>
             {!isLoggedIn && <> <Nav.Link as={Link} to="/signup" className="nav-link">
              Sign Up
             </Nav.Link>

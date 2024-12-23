@@ -72,8 +72,25 @@ router.get('/getemail',(req,res)=>{
         })
 
 
-         })
+   })
         
+
+   router.get('/getsentemails',(req,res)=>{
+    const userToken = req.headers.authorization;
+    const userDetails = jwt.verify(userToken,process.env.JWT_TOKEN_SECRET);
+
+    
+    UserEmails.find({senderEmail: userDetails.userName}).then(resp =>{
+
+         res.json({msg:'sent emails fetched success',data: resp})
+    }).catch(err =>{
+         console.log(err)
+         res.json({msg:'sent emails fetched failure'})
+    })
+
+
+
+   })
      
      
 module.exports = router;

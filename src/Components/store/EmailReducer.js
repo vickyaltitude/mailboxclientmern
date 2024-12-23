@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const emailsInitialState = {
-    emails:[]
+    emails:[],
+    sentEmails:[]
 }
 
 const emailReducer = createSlice({
@@ -9,8 +10,11 @@ const emailReducer = createSlice({
    name: 'emailreducer',
    reducers:{
       setEmails(state,action){
-         console.log(action.payload)
+        
            state.emails = action.payload
+      },
+      setSentEmails(state,action){
+         state.sentEmails = action.payload
       }
    }
 })
