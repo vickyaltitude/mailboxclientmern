@@ -9,6 +9,7 @@ const emailReducer = createSlice({
    name: 'emailreducer',
    reducers:{
       setEmails(state,action){
+         console.log(action.payload)
            state.emails = action.payload
       }
    }

@@ -1,16 +1,19 @@
-import React ,{useEffect,useState} from 'react';
+import React from 'react';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './Inbox.css';
+import { PiCircleNotchFill } from "react-icons/pi";
+import { useSelector,useDispatch } from 'react-redux';
 import { emailReducerAction } from '../store/EmailReducer';
-import { useSelector } from 'react-redux';
-
 
 const InboxPage = () => {
   const navigate = useNavigate();
- const currentUser = useSelector(state => state.userReducer.currentUserToken);
+
  const emails = useSelector(state => state.emailReducer.emails)
- const [isLoading,setIsLoading] = useState(false);
+ const unRead = emails.reduce((cumul,curr)=> cumul = cumul + !curr.emailOpened,0)
+ const dispatch = useDispatch();
+ 
+
  
 
   const handleCompose = () => {
@@ -18,33 +21,24 @@ const InboxPage = () => {
   };
 
   function handleMailPage(id){
+   
+    let updatedEmails = emails.map(email => email._id === id ? {...email,emailOpened:true} : email);
+    console.log(updatedEmails)
+    dispatch(emailReducerAction.setEmails(updatedEmails))
+
+    fetch('http://localhost:8000/reademail',{
+      method: 'POST',
+      headers:{
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({ emailId: id})
+    }).then(resp =>{
+      console.log(resp)
+    }).catch(err => console.log(err))
+
      navigate(`/inbox/${id}`)
   }
 
-  useEffect(()=>{
-
-    setIsLoading(true)
-
-    if(localStorage.getItem('userAuthId')){
-         
-      fetch('http://localhost:8000/getemail',{
-        method:'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization' : localStorage.getItem('userAuthId')
-        }
-      }).then(async resp =>{
-       const parsedData = await resp.json();
-      console.log(parsedData)
-      emailReducerAction.setEmails(parsedData.data)
-       
-      }).catch(err => console.log(err))
-  
-
-    }
-    setIsLoading(false)
-   
-  },[currentUser])
 
 
   return (
@@ -56,15 +50,17 @@ const InboxPage = () => {
               Compose
             </Button>
           </Col>
+
         </Row>
 
         <Row>
-            {isLoading && <h3>Loading please wait...</h3>}
-            {!isLoading &&   <Col>
-            <h3 className="text-center">Inbox</h3>
+        
+          <Col>
+            <h3 className="text-center" style={{color:'whitesmoke'}}>Inbox <span style={{color:'orange'}}>[{unRead}]</span></h3>
             <Table striped bordered hover responsive>
               <thead>
                 <tr>
+                  <th></th>
                   <th>Sender</th>
                   <th>Subject</th>
                   <th>Date</th>
@@ -73,15 +69,16 @@ const InboxPage = () => {
               <tbody>
                 {emails.map((email) => (
                     
-                  <tr onClick={()=>handleMailPage(email._id)} key={email._id}>
-                    <td>{email.senderEmail}</td>
+                  <tr style={{fontWeight: !email.emailOpened ? 'bolder' : 'normal'}} onClick={()=>handleMailPage(email._id)} key={email._id}>
+                    {<td style={{color: 'blue'}}>{!email.emailOpened ? <PiCircleNotchFill /> : ''}  </td>}
+                    <td> {email.senderEmail}</td>
                     <td>{email.emailSubject}</td>
-                    <td>25-05-2024</td>
+                    <td>{email.createdDate}</td>
                   </tr>
                 ))}
               </tbody>
             </Table>
-          </Col>}
+          </Col>
         
         </Row>
       </Container>

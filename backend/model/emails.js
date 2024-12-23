@@ -17,6 +17,14 @@ const userEmails = new Schema({
     emailBody:{
         type: String,
         required: true
+    },
+    createdDate:{
+        type: Date,
+        default: Date.now
+    },
+    emailOpened: {
+        type: Boolean,
+        default: false
     }
 })
 

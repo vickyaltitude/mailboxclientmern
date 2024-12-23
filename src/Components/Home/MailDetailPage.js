@@ -2,21 +2,17 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import './MailDetailPage.css';
+import { useSelector } from 'react-redux';
 
 const MailDetailPage = () => {
   const { emailId } = useParams(); 
   const navigate = useNavigate();
+  const emails = useSelector(state => state.emailReducer.emails);
 
   console.log(emailId)
-  const emails = [
-    { id: 1, sender: 'john@example.com', subject: 'Meeting Tomorrow', date: '2024-12-22', body: 'Let\'s meet tomorrow at 3 PM at the office.' },
-    { id: 2, sender: 'jane@example.com', subject: 'Your Account Update', date: '2024-12-21', body: 'Your account has been updated. Please check your profile.' },
-    { id: 3, sender: 'admin@example.com', subject: 'Newsletter - December', date: '2024-12-20', body: 'Here is the newsletter for December. Enjoy the updates!' },
-    { id: 4, sender: 'lucas@example.com', subject: 'Reminder: Project Deadline', date: '2024-12-19', body: 'Don\'t forget about the project deadline coming up this Friday!' },
-  ];
-
-  const emailDetails = emails.find(email => email.id === parseInt(emailId));
-
+  console.log(emails)
+  const emailDetails = emails.find(email => email._id === emailId);
+  console.log(emailDetails)
   if (!emailDetails) {
     navigate('/inbox');
   }
@@ -35,11 +31,11 @@ const MailDetailPage = () => {
         <Row>
           <Col md={8} className="mx-auto">
             <div className="email-detail-container">
-              <h3>{emailDetails.subject}</h3>
-              <p className="sender">From: {emailDetails.sender}</p>
-              <p className="date">Received: {emailDetails.date}</p>
+              <h3>{emailDetails.emailSubject}</h3>
+              <p className="sender">From: {emailDetails.senderEmail}</p>
+              <p className="date">{emailDetails.createdDate}</p>
               <hr />
-              <p className="email-body">{emailDetails.body}</p>
+              <p className="email-body">{emailDetails.emailBody}</p>
             </div>
           </Col>
         </Row>
