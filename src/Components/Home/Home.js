@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './Home.css';
+import { emailReducerAction } from '../store/EmailReducer';
+import { useDispatch,useSelector } from 'react-redux';
 
 const Home = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const sentEmails = useSelector(state => state.emailReducer.sentEmails);
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -33,6 +35,8 @@ const Home = () => {
           },
           body: JSON.stringify({userDetails: localStorage.getItem('userAuthId'),mail:{email,subject,message}})
     })
+
+    dispatch(emailReducerAction.setSentEmails([...sentEmails,{_id:sentEmails.length+1,recipientEmail: email,emailSubject: subject,emailBody:message,createdDate: Date.now().toLocaleString()}]))
 
     const respParse = await sendEmailToServer.json();
     console.log(respParse)

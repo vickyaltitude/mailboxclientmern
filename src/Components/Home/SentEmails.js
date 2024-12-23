@@ -41,8 +41,8 @@ const SentEmails = () => {
               <tbody>
                 {reversedEmail.map((email) => (
                     
-                  <tr className='mail-design' style={{fontWeight: !email.emailOpened ? 'bolder' : 'normal'}} onClick={()=>handleMailPage(email._id)} key={email._id}>
-                    <td> {email.senderEmail}</td>
+                  <tr className='mail-design'  onClick={()=>handleMailPage(email._id)} key={email._id}>
+                    <td> Sent by you</td>
                     <td>{email.emailSubject}</td>
                     <td>{email.createdDate}</td>
                   </tr>
