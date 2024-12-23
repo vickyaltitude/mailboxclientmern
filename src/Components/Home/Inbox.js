@@ -5,11 +5,14 @@ import './Inbox.css';
 import { PiCircleNotchFill } from "react-icons/pi";
 import { useSelector,useDispatch } from 'react-redux';
 import { emailReducerAction } from '../store/EmailReducer';
+import { MdDelete } from "react-icons/md";
 
 const InboxPage = () => {
   const navigate = useNavigate();
 
  const emails = useSelector(state => state.emailReducer.emails)
+ const reversedEmail = [...emails].reverse();
+ console.log(reversedEmail)
  const unRead = emails.reduce((cumul,curr)=> cumul = cumul + !curr.emailOpened,0)
  const dispatch = useDispatch();
  
@@ -39,7 +42,22 @@ const InboxPage = () => {
      navigate(`/inbox/${id}`)
   }
 
+ function handleEmailDelete(e,id){
+  e.stopPropagation();
+   let updatedEmails = emails.filter(email => email._id !== id );
+    dispatch(emailReducerAction.setEmails(updatedEmails))
+    fetch('http://localhost:8000/deleteemail',{
+       method: 'POST',
+       headers:{
+        'Content-Type' : 'application/json'
+       },
+       body: JSON.stringify({emailId : id})
+    }).then(resp =>{
 
+     return resp.json()
+       
+    }).then(data => console.log(data)).catch( err => console.log(err))
+ }
 
   return (
     <div className="inbox-page">
@@ -56,24 +74,26 @@ const InboxPage = () => {
         <Row>
         
           <Col>
-            <h3 className="text-center" style={{color:'whitesmoke'}}>Inbox <span style={{color:'orange'}}>[{unRead}]</span></h3>
-            <Table striped bordered hover responsive>
+            <h3 className="text-center" style={{color:'whitesmoke'}}>Inbox {unRead > 0 ? <span style={{color:'orange'}}>[{unRead}]</span> : ''} </h3>
+            <Table hover bordered responsive>
               <thead>
                 <tr>
                   <th></th>
                   <th>Sender</th>
                   <th>Subject</th>
                   <th>Date</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                {emails.map((email) => (
+                {reversedEmail.map((email) => (
                     
-                  <tr style={{fontWeight: !email.emailOpened ? 'bolder' : 'normal'}} onClick={()=>handleMailPage(email._id)} key={email._id}>
+                  <tr className='mail-design' style={{fontWeight: !email.emailOpened ? 'bolder' : 'normal'}} onClick={()=>handleMailPage(email._id)} key={email._id}>
                     {<td style={{color: 'blue'}}>{!email.emailOpened ? <PiCircleNotchFill /> : ''}  </td>}
                     <td> {email.senderEmail}</td>
                     <td>{email.emailSubject}</td>
                     <td>{email.createdDate}</td>
+                    <td onClick={(e)=> handleEmailDelete(e,email._id)} style={{color: 'red', fontSize:'1.8rem'}}><  MdDelete /></td>
                   </tr>
                 ))}
               </tbody>

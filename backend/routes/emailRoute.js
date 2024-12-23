@@ -59,6 +59,21 @@ router.get('/getemail',(req,res)=>{
         })
         
      })
+
+     router.post('/deleteemail',(req,res)=>{
+         const id = req.body.emailId;
+         console.log(id)
+         UserEmails.findOneAndDelete({_id: id}).then(resp =>{
+
+            res.json({msg:'mail deleted successfully'})
+
+        }).catch(err =>{
+            res.json({err,msg:'error while deleting'})
+        })
+
+
+         })
+        
      
      
 module.exports = router;

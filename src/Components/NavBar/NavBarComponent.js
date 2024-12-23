@@ -38,7 +38,7 @@ const NavbarComponent = () => {
         <Navbar.Collapse id="basic-navbar-nav" className={`menu-collapse ${isMenuOpen ? 'open' : ''}`}>
           <Nav className="ms-auto">
           
-            <Nav.Link as={Link} to="/home" className="nav-link">Home</Nav.Link>
+            <Nav.Link as={Link} to="/home" className="nav-link">Compose</Nav.Link>
             <Nav.Link as={Link} to="/about" className="nav-link">About</Nav.Link>
             <Nav.Link as={Link} to="/inbox" className="nav-link">Inbox</Nav.Link>
             {!isLoggedIn && <> <Nav.Link as={Link} to="/signup" className="nav-link">

@@ -9,6 +9,7 @@ import {emailReducerAction} from './Components/store/EmailReducer'
 import { userReducerAction } from "./Components/store/UserReducer";
 import InboxPage from "./Components/Home/Inbox";
 import MailDetailPage from "./Components/Home/MailDetailPage";
+import About from "./Components/Home/About";
 
 
 
@@ -76,6 +77,7 @@ function App() {
         <Route path='/login' element={<Login /> }/>
         <Route path='/inbox' element={<InboxPage />} />
         <Route path='/inbox/:emailId' element={<MailDetailPage /> } /> 
+        <Route path='/about' element={<About />} />
         </Routes>  
         }
    

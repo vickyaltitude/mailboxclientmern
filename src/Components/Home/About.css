@@ -1,0 +1,26 @@
+.about-page {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+  }
+  
+  .about-page h2 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #007bff;
+  }
+  
+  .about-page ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .about-page ul li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .card-img {
+    height: 250px;
+    object-fit: cover;
+  }
+  
